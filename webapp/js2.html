@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <title>JavaScript Test Page</title>
+        
+        <script>
+            function hello() {
+                let name=document.getElementById("name").value;
+                alert("Hello " + name + ", I'm JavaScript!");
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Hello</h1>
+        
+        <p>Name: <input type="text" id="name" value="Anita"></p>        
+        <input type="button" value="Say Hello" onclick="hello()">
+    </body>
+</html>

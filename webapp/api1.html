@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Weather App</title>
+        <script>
+            function getWeather() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=17013,us&appid=71600e803223b59828cade9d4fc4d46b", true);
+
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let resp = JSON.parse(this.responseText);
+
+                        let temp = document.getElementById("temp");
+                        temp.innerHTML = resp.main.temp;
+                    }
+                };
+
+                xhttp.send();
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Weather App</h1>
+        <ul>
+            <li>Temperature: <span id="temp">Unknown</span> Kelvin</li>
+        </ul>
+        <input type="button" onclick="getWeather()" value="Get the Weather">
+    </body>
+</html>
+

@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    <head>
+        <title>JavaScript Test Page</title>
+        
+        <style>
+            .invisible { display: none }
+            .bright { color: red }
+        </style>
+        
+        <script>
+            function hide() {
+                let toHide = document.getElementById("hideme");
+                toHide.classList.add("invisible");
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Hello</h1>
+        
+        <p id="hideme" class="bright">Just some stuff in the page.</p>
+        
+        <input type="button" value="Hide it" onclick="hide()">
+    </body>
+</html>

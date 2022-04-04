@@ -1,0 +1,19 @@
+{
+  "name": "northwindapi",
+  "version": "1.0.0",
+  "description": "Sample API for the Northwind database",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "md5": "^2.3.0",
+    "nodemon": "^2.0.15",
+    "npx": "^10.2.2",
+    "sqlite3": "^5.0.2"
+  }
+}
