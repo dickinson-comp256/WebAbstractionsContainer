@@ -1,12 +1,15 @@
-// Create express app
-var express = require("express")
+// Create express apps
+var express = require('express')
+var cors = require('cors')
+
 var app = express()
+app.use(cors())
 
 // Connect to the sqlite database
 var sqlite3 = require('sqlite3').verbose()
 var md5 = require('md5')
 
-const DBSOURCE = "/db/Northwind.db" 
+const DBSOURCE = "/db/Northwind.db"
 let db = new sqlite3.Database(DBSOURCE, (err) => {
     if (err) {
       // Cannot open database
@@ -16,9 +19,9 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         console.log('Connected to the SQlite database.')
     }
 })
-        
+
 // Start server
-var HTTP_PORT = 8000 
+var HTTP_PORT = 8000
 app.listen(HTTP_PORT, () => {
     console.log("Server running on port %PORT%".replace("%PORT%",HTTP_PORT))
 });
