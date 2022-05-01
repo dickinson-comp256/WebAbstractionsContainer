@@ -1,35 +1,16 @@
-<%@ page contentType="text/html" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="org.sqlite.*" %>
- 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
     <head>
-        <title>SQLite Demo</title>
+        <title>Hello World JSP</title>
     </head>
     <body>
+        <h1>Java Server Page</h1>
+
         <%
-        Class.forName("org.sqlite.JDBC");
-        Connection conn =
-            DriverManager.getConnection("jdbc:sqlite:/db/Northwind.db");
-	 %>
-            
-        <p>Customers:</p>
-        <OL>
-            <%
-            Statement stat = conn.createStatement();
-            ResultSet rs = stat.executeQuery("SELECT * FROM Customers;");
-
-            while (rs.next()) {
-                out.println("<li>" + rs.getString("CompanyName") + "</td>");
-            }
- 
-            rs.close();
-            %>
-        </OL>
-
-	<%
-        conn.close();
-        %>        
+        // Java Code!
+        String firstName = request.getParameter("first_name");
+        out.println("<p><em>Hello</em> "
+          + firstName + "!</p>");
+        %>
     </body>
 </html>

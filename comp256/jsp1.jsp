@@ -1,16 +1,18 @@
 <!doctype html>
 <html>
     <head>
-        <title>Test JSP Page</title>
+        <title>Hello World JSP</title>
     </head>
     <body>
-        <h1>It works!</h1>
-        <UL>
-            <%
-                for (int i = 0; i < 5; ++i) {
-                    out.println("<li>" + i + ". Hello, world!</li>");
-                }
-            %>
-        </UL>
+        <h1>Java Server Page</h1>
+
+        <%
+        // Java Code!
+        String name = "Arabella";
+        out.println("<p><em>Hello</em> "
+          + name + "!</p>");
+        %>
+
+        <p>The end.</p>
     </body>
 </html>

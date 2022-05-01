@@ -3,16 +3,21 @@
     <head>
         <title>First Call to our API</title>
         <script>
-            function apiCall() {
+            function sampleRequest() {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", "http://localhost:8000/test", true);
+                xhttp.open("GET", "http://localhost:8000/sample", true);
 
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         let resp = JSON.parse(this.responseText);
 
                         let msg = document.getElementById("message");
-                        message.innerHTML = resp.message;
+                        msg.innerHTML = resp.message;
+                        let sem = document.getElementById("semester");
+                        sem.innerHTML = resp.semester;
+                        let c1 = document.getElementById("course0");
+                        c1.innerHTML = resp.classList[0].class + " ("
+                          + resp.classList[0].time + ")";
                     }
                 };
 
@@ -21,12 +26,17 @@
         </script>
     </head>
     <body>
-        <h1>API Test</h1>
-        
-        <p>Calling the /test endpoint</p>
-        <p>Message: <span id="message"></span></p>
-        
-        <input type="button" onclick="apiCall()" value="Call API">
+        <h1>Sample API Call</h1>
+
+        <input type="button" onclick="sampleRequest()"
+          value="Make Request to /sample Endpoint">
+
+        <p>Message: <span id="message"></span><br>
+        Semester: <span id="semester"></span><br>
+        Courses:
+        <ul>
+          <li><span id="course0"></span></li>
+          <li><span id="course1"></span></li>
+        </ul>
     </body>
 </html>
-

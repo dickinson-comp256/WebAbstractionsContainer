@@ -1,63 +1,61 @@
-// Create express apps
+// Create an express app
 var express = require('express')
 var cors = require('cors')
-
 var app = express()
 app.use(cors())
+app.listen(8000);
 
 // Connect to the sqlite database
 var sqlite3 = require('sqlite3').verbose()
-var md5 = require('md5')
+let db = new sqlite3.Database("/db/Northwind.db");
 
-const DBSOURCE = "/db/Northwind.db"
-let db = new sqlite3.Database(DBSOURCE, (err) => {
-    if (err) {
-      // Cannot open database
-      console.error(err.message)
-      throw err
-    }else{
-        console.log('Connected to the SQlite database.')
-    }
-})
+// Functions for each API endpoints are below.
 
-// Start server
-var HTTP_PORT = 8000
-app.listen(HTTP_PORT, () => {
-    console.log("Server running on port %PORT%".replace("%PORT%",HTTP_PORT))
+app.get("/sample", (req, res) => {
+    courseData = {
+       message: "Just Some Sample Data",
+       semester: "Spring 2022",
+       classList: [
+         {
+           class: "COMP 256",
+           time: "MWF 8:30"
+         },
+         {
+           class: "COMP 492",
+           time: "TF 1:30"
+         }
+       ]
+    };
+
+    res.json(courseData);
 });
 
+app.get("/customers/bycountry", (req, res) => {
+    var country = req.query.country;
 
-// Root endpoint
-app.get("/", (req, res, next) => {
-    res.json({
-    	message:"Northwind API is up and Ok"
-    })
-});
+    var sql = "SELECT CompanyName " +
+              "FROM Customers " +
+              "WHERE Country='" + country + "';";
 
-// Insert other API endpoints here.
-
-app.get("/test", (req, res, next) => {
-    res.json({
-       message: "The /test endpoint works!!"
-    })
-});
-
-app.get("/customers", (req, res, next) => {
-    var sql = "SELECT * FROM Customers;"
-    var params = []
-    db.all(sql, params, (err, rows) => {
-        if (err) {
-          res.status(400).json({"error":err.message});
-          return;
+    db.all(sql, [], (err, rows) => {
+      if (err != null) {
+        console.log("ERROR: " + err);
+      }
+      else {
+        customerData = {
+          name: "Customers by Country",
+          country: country,
+          count: rows.length,
+          data: rows
         }
-        res.json({
-            "message":"success",
-            "data": rows
-        })
-      });
+
+        res.json(customerData);
+      }
+    });
 });
 
-// Default response for any other request
+
+// Default response for any endpoint other than those handled above.
 app.use(function(req, res){
-    res.status(404);
+    res.status(404);  // Not Found.
 });
